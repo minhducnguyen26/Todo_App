@@ -12,6 +12,7 @@
 
   :root {
     /* Light Theme Mode */
+    --lt-white      : #F4F6FD;
     --lt-blue-light : #ADBAEB;
     --lt-blue       : #076aff;
     --lt-purple-neon: #D103FC;
