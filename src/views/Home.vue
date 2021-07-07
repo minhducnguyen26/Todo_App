@@ -1,5 +1,5 @@
 <template>
-  <div class="main_wrapper">
+  <div class="home_wrapper">
     
     <div class="menu_and_search_and_notification">
       <div class="hambuger_menu">
@@ -45,11 +45,18 @@
 
     </div>
 
-    <div class="sections">
+    <div class="sections today_task">
       <div class="section_titles">TODAY'S TASKS</div>
 
       <div class="task_boxes">
-        <TaskBox></TaskBox>
+        <TaskBox>Daily meeting with team</TaskBox>
+        <TaskBox>Finish this web app</TaskBox>
+        <TaskBox>Daily meeting with team</TaskBox>
+        <TaskBox>Finish this web app</TaskBox>
+        <TaskBox>Daily meeting with team</TaskBox>
+        <TaskBox>Finish this web app</TaskBox>
+        <TaskBox>Daily meeting with team</TaskBox>
+        <TaskBox>Finish this web app</TaskBox>
       </div>
     </div>
     
@@ -72,11 +79,14 @@ export default {
 </script>
 
 <style scoped>
-  .main_wrapper {
+  .home_wrapper {
     padding: 30px 25px;
     border: 1px solid var(--lt-grey);
     border-radius: 50px;
     height: 100vh;
+    background-color: var(--lt-white);
+    overflow: hidden;
+    overflow-y: scroll;
   }
   .menu_and_search_and_notification {
     display: grid;
@@ -89,7 +99,7 @@ export default {
     justify-content: space-between;
   }
   .search_icon {
-    transform: rotateY(0);
+    transform: scaleX(-1);
   }
   .greeting {
     font-size: 30px;
@@ -99,6 +109,9 @@ export default {
   }
   .sections {
     margin-bottom: 40px;
+  }
+  .today_task {
+    margin-bottom: -9px;
   }
   .section_titles {
     font-size: 11px;
@@ -113,6 +126,7 @@ export default {
   .category_box {
     padding: 20px 10px;
     border-radius: 20px;
+    background-color: white;
     box-shadow: 3px 5px 10px var(--lt-grey-light);
   }
   .task_amount {
