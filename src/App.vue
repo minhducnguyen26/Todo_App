@@ -1,9 +1,4 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link>
-    <router-link to="/Menu">Menu</router-link>
-    <router-link to="/CreateTodo">Create Todo</router-link>
-  </div>
   <router-view/>
 </template>
 
@@ -12,12 +7,27 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
   }
 
   :root {
-    --navy: rgb(3, 25, 86);
-    --blue: rgb(52, 79, 161);
-    --neon-blue: rgb(46, 110, 216);
-    --neon-pink: rgb(235, 5, 255);
+    /* Light Theme Mode */
+    --lt-blue-light : #ADBAEB;
+    --lt-blue       : #076aff;
+    --lt-purple-neon: #D103FC;
+    --lt-grey-light : #e5e7f0;
+    --lt-grey       : #9D9AB4;
+    --lt-grey-dark  : #373B5E;
+    --lt-black      : #020417;
+    
+    /* Dark Theme Mode */
+    --dt-blue-neon  : #4F74FF;
+    --dt-blue       : #3D47AF;
+    --dt-blue-navy  : #0A155A;
+    --dt-purple-neon: #D103FC;
+    --dt-grey-light : #BBC2D8;
+    --dt-grey       : #7D80AA;
+    --dt-grey-dark  : #48466B;
+    --dt-black      : #010319;
   }
 </style>
