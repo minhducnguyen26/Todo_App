@@ -15,10 +15,11 @@
     --lt-white      : #F4F6FD;
     --lt-blue-light : #ADBAEB;
     --lt-blue       : #076aff;
+    --lt-navy       : #0A155A;
     --lt-purple-neon: #D103FC;
     --lt-grey-light : #e5e7f0;
     --lt-grey       : #9D9AB4;
-    --lt-grey-dark  : #373B5E;
+    --lt-grey-dark  : #757575;
     --lt-black      : #020417;
     
     /* Dark Theme Mode */

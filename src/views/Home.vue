@@ -1,4 +1,6 @@
 <template>
+  <Menu></Menu>
+  
   <div class="home_wrapper">
     
     <div class="menu_and_search_and_notification">
@@ -49,18 +51,12 @@
       <div class="section_titles">TODAY'S TASKS</div>
 
       <div class="task_boxes">
-        <TaskBox>Daily meeting with team</TaskBox>
-        <TaskBox>Finish this web app</TaskBox>
-        <TaskBox>Daily meeting with team</TaskBox>
-        <TaskBox>Finish this web app</TaskBox>
-        <TaskBox>Daily meeting with team</TaskBox>
-        <TaskBox>Finish this web app</TaskBox>
-        <TaskBox>Daily meeting with team</TaskBox>
-        <TaskBox>Finish this web app</TaskBox>
+        <TaskBox v-for="todo in todos" :key="todo._id"
+          :todo=todo>{{ todo.name }}</TaskBox>
       </div>
     </div>
     
-    <router-link to="/Menu"> 
+    <router-link to="/CreateTodo"> 
       <div class="add_new_todo_button">
         <i class="las la-plus"></i>
       </div>
@@ -69,20 +65,44 @@
 </template>
 
 <script>
+import Menu from "../components/Menu.vue"
 import TaskBox from "../components/TaskBox.vue"
 
 export default {
   components: {
+    Menu,
     TaskBox
+  },
+  data() {
+    return {
+      url: "http://localhost:8080",
+
+      todos: [],
+
+      new_todo_name       : "",
+      new_todo_description: "",
+      new_todo_deadline   : ""
+    }
+  },
+  created() {
+    this.get_all_todos_from_the_server();
+  },
+  methods: {
+    get_all_todos_from_the_server: function() {
+        fetch(`${this.url}/todo`).then((response) => {
+            response.json().then((data) => {
+                this.todos = data;
+            })
+        })
+    },
   }
+  
 }
 </script>
 
 <style scoped>
   .home_wrapper {
     padding: 30px 25px;
-    border: 1px solid var(--lt-grey);
-    border-radius: 50px;
     height: 100vh;
     background-color: var(--lt-white);
     overflow: hidden;
@@ -92,6 +112,9 @@ export default {
     display: grid;
     grid-template-columns: 4.5fr 1fr;
     font-size: 25px;
+    color: var(--lt-grey);
+  }
+  .link_to_menu:visited {
     color: var(--lt-grey);
   }
   .search_and_notification {

@@ -10,7 +10,9 @@
 
 <script>
 export default {
-
+    props: {
+        todo: Object
+    },
 }
 </script>
 
@@ -28,7 +30,7 @@ export default {
         border-radius: 50%;
         text-align: center;
         padding: 3px 0;
-        margin-right: 16px;
+        margin-right: 19px;
         font-size: 10px;
     }
     .check_mark {
