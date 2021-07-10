@@ -15,7 +15,7 @@
     --lt-white      : #F4F6FD;
     --lt-blue-light : #ADBAEB;
     --lt-blue       : #076aff;
-    --lt-navy       : #0A155A;
+    --lt-navy       : #0a155a;
     --lt-purple-neon: #D103FC;
     --lt-grey-light : #e5e7f0;
     --lt-grey       : #9D9AB4;
