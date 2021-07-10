@@ -1,20 +1,21 @@
 <template>
-  <Menu></Menu>
-  
   <div class="home_wrapper">
     
     <div class="menu_and_search_and_notification">
-      <div class="hambuger_menu">
-        <i class="las la-bars"></i>
-      </div>
+      <router-link class="link_to_menu" to="/Menu">
+        <div class="hambuger_menu">
+          <i class="las la-bars"></i>
+        </div>
+      </router-link>
 
       <div class="search_and_notification">
         <div class="search_icon">
           <i class="las la-search"></i>
         </div>
 
-        <div class="notification_icon">
-          <i class="las la-bell"></i>
+        <div class="notification_icon" @click="toggle_notification">
+          <i class="notification_on las la-bell" v-if="notification"></i>
+          <i class="notification_off las la-bell-slash" v-if="!notification"></i>
         </div>
       </div>
     
@@ -51,8 +52,11 @@
       <div class="section_titles">TODAY'S TASKS</div>
 
       <div class="task_boxes">
-        <TaskBox v-for="todo in todos" :key="todo._id"
-          :todo=todo>{{ todo.name }}</TaskBox>
+        <TaskBox v-for="todo in todos" :key="todo._id" 
+          :todo=todo :edit_done_show_todo=edit_done_show_todo
+          @deleted_one_task="get_all_todos_from_the_server"
+          @need_to_open_edit_todo_modal="toggle_show_edit_todo_modal(todo)"
+          @try_to_open_action_buttons_box="show_action_buttons_box">{{ todo.name }}</TaskBox>
       </div>
     </div>
     
@@ -62,16 +66,20 @@
       </div>
     </router-link>
   </div>
+
+  <EditTodo v-if="show_edit_todo_modal" :todo="target_todo_to_edit"
+    @close_edit_todo_modal="edit_todo_done"
+    @updated_todo="saved_new_todo_edit"></EditTodo>
 </template>
 
 <script>
-import Menu from "../components/Menu.vue"
-import TaskBox from "../components/TaskBox.vue"
+import TaskBox  from "../components/TaskBox.vue"
+import EditTodo from "../components/EditTodo.vue"
 
 export default {
   components: {
-    Menu,
-    TaskBox
+    TaskBox,
+    EditTodo
   },
   data() {
     return {
@@ -79,22 +87,45 @@ export default {
 
       todos: [],
 
-      new_todo_name       : "",
-      new_todo_description: "",
-      new_todo_deadline   : ""
+      notification: true,
+
+      show_edit_todo_modal: false,
+
+      target_todo_to_edit: "",
+
+      edit_done_show_todo: false
     }
   },
   created() {
     this.get_all_todos_from_the_server();
   },
   methods: {
-    get_all_todos_from_the_server: function() {
+    get_all_todos_from_the_server() {
         fetch(`${this.url}/todo`).then((response) => {
             response.json().then((data) => {
                 this.todos = data;
             })
         })
     },
+    toggle_notification() {
+      this.notification = ! this.notification;
+    },
+    toggle_show_edit_todo_modal(todo) {
+      this.show_edit_todo_modal = true;
+      this.target_todo_to_edit = todo;
+    },
+    edit_todo_done() {
+      this.show_edit_todo_modal = false;
+      this.edit_done_show_todo  = true;
+    },
+    show_action_buttons_box() {
+      this.edit_done_show_todo  = false;
+    },
+    saved_new_todo_edit() {
+      this.get_all_todos_from_the_server();
+      this.show_edit_todo_modal = false;
+      this.edit_done_show_todo  = true;
+    }
   }
   
 }

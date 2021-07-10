@@ -11,23 +11,23 @@
         <div class="middle">
             <div class="input_section">
                 <div class="input_todo_name">
-                    <input type="text" placeholder="Enter new task">
+                    <input type="text" placeholder="Enter new task" v-model="new_todo_name">
                 </div>
 
                 <div class="input_todo_description">
-                    <input type="text" placeholder="Enter description">
+                    <input type="text" placeholder="Enter description" v-model="new_todo_description">
                 </div>
             </div>
 
             <div class="deadline_and_category_options_section">
                 <div class="date_option">
                     <div class="date_placeholder">
-                        <div class="date">{{ today }}</div>
+                        <div class="date">{{ new_todo_deadline }}</div>
                         <div class="calendar_icon">
                             <i class="las la-calendar"></i>
                         </div>
                     </div>
-                    <input type="date" v-model="today">
+                    <input type="date" v-model="new_todo_deadline">
                 </div>
 
                 <div class="category_options">
@@ -60,7 +60,7 @@
         </div>
 
         <div class="bottom">
-            <div class="create_new_todo_button">
+            <div class="create_new_todo_button" @click="add_new_todo">
                 <p>Add task</p>
                 <div class="arrow_right_icon">
                     <i class="las la-angle-right"></i>
@@ -74,8 +74,37 @@
 export default {
     data() {
         return {
-            today : (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)
+            url: "http://localhost:8080",
+            new_todo_name: "",
+            new_todo_description: "",
+            // Default value of todo dealine is today
+            new_todo_deadline : (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
         }
+    },
+    methods: {
+        add_new_todo() {
+            var request_body = {
+                name       : this.new_todo_name,
+                description: this.new_todo_description,
+                done       : false,
+                deadline   : this.new_todo_deadline
+            };
+            fetch(`${this.url}/todo`, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(request_body)
+            }).then((response) => {
+                if(response.status == 400) {
+                    response.json().then((data) => {
+                        alert(data.msg)
+                    })
+                } else if(response.status == 201) {
+                    this.new_todo_name        = "";
+                    this.new_todo_description = "";
+                    this.new_todo_deadline    = "";
+                }
+            });
+        },
     }
 }
 </script>
