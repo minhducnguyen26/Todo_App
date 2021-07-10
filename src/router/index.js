@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import Home       from '../views/Home.vue'
+import Home from "../views/Home.vue"
+import Menu from "../views/Menu"
 import CreateTodo from "../views/CreateTodo.vue"
-import EditTodo from "../views/EditTodo.vue"
-import Settings   from "../views/Settings.vue"
+import Settings from "../views/Settings.vue"
 
 const routes = [
   {
@@ -11,12 +11,12 @@ const routes = [
     component: Home
   },
   {
-    path: '/CreateTodo',
-    component: CreateTodo
+    path: '/Menu',
+    component: Menu
   },
   {
-    path: '/EditTodo',
-    component: EditTodo
+    path: '/CreateTodo',
+    component: CreateTodo
   },
   {
     path: '/Settings',
