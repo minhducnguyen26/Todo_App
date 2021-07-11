@@ -101,7 +101,7 @@ export default {
                 } else if(response.status == 201) {
                     this.new_todo_name        = "";
                     this.new_todo_description = "";
-                    this.new_todo_deadline    = "";
+                    this.new_todo_deadline    = (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10);
                 }
             });
         },
