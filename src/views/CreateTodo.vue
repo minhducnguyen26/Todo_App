@@ -31,13 +31,17 @@
                 </div>
 
                 <div class="category_options">
-                    <div class="school">
-                        <div class="circle">
+                    <div class="school" @click="category_selected('School')"
+                        :class="{ option_for_school_category: category_school_selected }">
+                        <div class="circle"
+                            :class="{ circle_for_school_category: category_school_selected }">
                             <div class="center"></div>
                         </div>
                     </div>
-                    <div class="personal">
-                        <div class="circle">
+                    <div class="personal" @click="category_selected('Personal')"
+                        :class="{ option_for_personal_category: category_personal_selected }">
+                        <div class="circle"
+                            :class="{ circle_for_personal_category: category_personal_selected }">
                             <div class="center"></div>
                         </div>
                     </div>
@@ -78,7 +82,11 @@ export default {
             new_todo_name: "",
             new_todo_description: "",
             // Default value of todo dealine is today
-            new_todo_deadline : (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+            new_todo_deadline: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+            new_todo_category: "",
+            
+            category_school_selected  : false,
+            category_personal_selected: false
         }
     },
     methods: {
@@ -87,7 +95,8 @@ export default {
                 name       : this.new_todo_name,
                 description: this.new_todo_description,
                 done       : false,
-                deadline   : this.new_todo_deadline
+                deadline   : this.new_todo_deadline,
+                category   : this.new_todo_category
             };
             fetch(`${this.url}/todo`, {
                 method: "POST",
@@ -105,6 +114,17 @@ export default {
                 }
             });
         },
+        category_selected(category) {
+            this.new_todo_category = category;
+            if (category === "School") {
+                this.category_school_selected   = !this.category_school_selected;
+                this.category_personal_selected = false;
+            }
+            else if (category === "Personal") {
+                this.category_personal_selected = !this.category_personal_selected;
+                this.category_school_selected   = false;
+            }
+        }
     }
 }
 </script>
@@ -187,6 +207,12 @@ export default {
         border-radius: 50%;
         margin-left: 15px;
     }
+    .option_for_school_category {
+        border: 2px solid var(--lt-purple-neon);
+    }
+    .option_for_personal_category {
+        border: 2px solid var(--lt-blue);
+    }
     .circle {
         border: 2px solid;
         border-radius: 50%;
@@ -194,8 +220,14 @@ export default {
     .school > .circle {
         border-color: var(--lt-purple-neon);
     }
+    .circle_for_school_category {
+        background-color: var(--lt-purple-neon);
+    }
     .personal > .circle {
         border-color: var(--lt-blue);
+    }
+    .circle_for_personal_category {
+        background-color: var(--lt-blue);
     }
     .center {
         height: 15px;

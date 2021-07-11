@@ -3,7 +3,7 @@
         :class="{ task_box_wrapper_done: todo.done }">
 
         <div class="check_box" @click="toggle_todo_status"
-            :class="{ check_box_done: todo.done }">
+            :class="{ check_box_for_school: todo.category === 'School', check_box_done: todo.done}">
             <i class="check_mark las la-check"></i>
         </div>
         
@@ -89,7 +89,7 @@ export default {
 }
 
 .check_box {
-    border: 2px solid var(--lt-purple-neon);
+    border: 2px solid var(--lt-blue);
     border-radius: 50%;
     text-align: center;
     padding: 3px 0;
@@ -97,6 +97,10 @@ export default {
     font-size: 10px;
     margin-top: auto;
     margin-bottom: auto;
+}
+
+.check_box_for_school {
+    border: 2px solid var(--lt-purple-neon);
 }
 
 .check_box_done {
