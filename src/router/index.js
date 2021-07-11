@@ -3,7 +3,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from "../views/Home.vue"
 import Menu from "../views/Menu"
 import CreateTodo from "../views/CreateTodo.vue"
-import Settings from "../views/Settings.vue"
 
 const routes = [
   {
@@ -17,10 +16,6 @@ const routes = [
   {
     path: '/CreateTodo',
     component: CreateTodo
-  },
-  {
-    path: '/Settings',
-    component: Settings
   }
 ]
 
