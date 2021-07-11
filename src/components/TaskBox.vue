@@ -1,11 +1,17 @@
 <template>
     <div class="task_box_wrapper" v-if="!show_action_buttons_box || edit_done_show_todo"
-        @click="open_action_buttons_box">
-        <div class="check_box">
+        :class="{ task_box_wrapper_done: todo.done }">
+
+        <div class="check_box" @click="toggle_todo_status"
+            :class="{ check_box_done: todo.done }">
             <i class="check_mark las la-check"></i>
         </div>
         
-        <div class="task_name"><slot></slot></div>
+        <div class="task_name" :class="{ task_name_done: todo.done }"><slot></slot></div>
+
+        <div class="edit_icon"  @click="open_action_buttons_box">
+            <i class="las la-edit"></i>
+        </div>
     </div>
 
     <div class="action_buttons_wrapper" v-else>
@@ -54,7 +60,16 @@ export default {
         },
         edit_todo() {
             this.$emit("need_to_open_edit_todo_modal");
-        }
+        },
+        toggle_todo_status(){
+            this.todo.done = !this.todo.done;
+
+            fetch(`${this.url}/todo/`+ this.todo._id,{
+                method:"PATCH",
+                headers:{"Content-Type":"application/json"},
+                body:JSON.stringify( { done: this.todo.done } )
+            });
+        },
     }
 }
 </script>
@@ -64,9 +79,13 @@ export default {
     border-radius: 25px;
     padding: 20px;
     display: grid;
-    grid-template-columns: 1fr 7fr;
+    grid-template-columns: 1fr 6fr 1fr;
     background-color: white;
     margin-bottom: 10px;
+}
+
+.task_box_wrapper_done {
+    background-color: var(--lt-grey-light);
 }
 
 .check_box {
@@ -76,6 +95,13 @@ export default {
     padding: 3px 0;
     margin-right: 19px;
     font-size: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.check_box_done {
+    border: 2px solid var(--lt-blue-light);
+    background-color: var(--lt-blue-light);
 }
 
 .check_mark {
@@ -86,6 +112,18 @@ export default {
     display: flex;
     align-items: center;
     font-size: 17px;
+}
+
+.task_name_done {
+    text-decoration: line-through;
+}
+
+.edit_icon {
+    font-size: 22px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: var(--lt-grey);
 }
 
 .action_buttons_wrapper {
@@ -113,8 +151,8 @@ export default {
 }
 
 .delete_task {
-    background-color: var(--lt-purple-neon);
-    border: 1px solid var(--lt-purple-neon);
+    background-color: var(--lt-red);
+    border: 1px solid var(--lt-red);
     color: white;
 }
 </style>
