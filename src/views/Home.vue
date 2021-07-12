@@ -52,11 +52,15 @@
       <div class="section_titles">TODAY'S TASKS</div>
 
       <div class="task_boxes">
-        <TaskBox v-for="todo in todos" :key="todo._id" 
-          :todo=todo :edit_done_show_todo=edit_done_show_todo
-          @deleted_one_task="get_all_todos_from_the_server"
-          @need_to_open_edit_todo_modal="toggle_show_edit_todo_modal(todo)"
-          @try_to_open_action_buttons_box="show_action_buttons_box">{{ todo.name }}</TaskBox>
+        <transition-group name="list_transition">
+          <TaskBox v-for="todo in todos" :key="todo._id" 
+            :todo=todo :edit_done_show_todo=edit_done_show_todo
+            @deleted_one_task="get_all_todos_from_the_server"
+            @need_to_open_edit_todo_modal="toggle_show_edit_todo_modal(todo)"
+            @try_to_open_action_buttons_box="show_action_buttons_box">
+              {{ todo.name }}
+          </TaskBox>
+        </transition-group>
       </div>
     </div>
     
@@ -203,6 +207,7 @@ export default {
     width: 60%;
     background-color: var(--lt-purple-neon);
     box-shadow: 1px 3px 6px -1px var(--lt-purple-neon);
+    animation: slide_right_1 1s ease;
   }
   .cursor_1 {
     height: 5px;
@@ -215,6 +220,7 @@ export default {
     width: 40%;
     background-color: var(--lt-blue);
     box-shadow: 1px 3px 6px -1px var(--lt-blue);
+    animation: slide_right_2 1s ease;
   }
   .cursor_2 {
     height: 5px;
@@ -232,5 +238,57 @@ export default {
     color: white;
     background-color: var(--lt-blue);
     box-shadow: 0px 5px 13px -3px var(--lt-blue);
+    animation: fade_in 1s ease;
+  }
+
+  /* List transition animation */
+  .list_transition-enter-from,
+  .list_transition-leave-to {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  .list_transition-enter-active {
+    transition: all 0.5s ease;
+  }
+  .list_transition-leave-active {
+    transition: all 0 ease;
+    position: absolute;
+  }
+  .list_transition-move {
+    transition: all 0.3s ease;
+  }
+
+  /* Slide right progress line animation */
+  @keyframes slide_right_1 {
+    0% {
+      opacity: 0;
+      width: 0px;
+    }
+    100% {
+      opacity: 1;
+      width: 60%;
+    }
+  }
+  @keyframes slide_right_2 {
+    0% {
+      opacity: 0;
+      width: 0px;
+    }
+    100% {
+      opacity: 1;
+      width: 40%;
+    }
+  }
+
+  /* Fade in animation for Add new todo button*/
+  @keyframes fade_in {
+    0% {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 </style>

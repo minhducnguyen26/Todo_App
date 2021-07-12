@@ -159,66 +159,288 @@ a:-webkit-any-link {
 }
 
 .line {
-    background-color: var(--lt-blue);
+    background-color: var(--lt-navy);
     margin-bottom: 10px;
     height: 10px;
-    box-shadow: -13px 0px 13px -3px var(--lt-blue);
 }
 
 .line_1 {
     width : 10px;
+    animation: fade_in_1 0.3s ease;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade_in_1 {
+    0% {
+      opacity: 0;
+      width: 0;
+    }
+    100% {
+      opacity: 1;
+      width: 10px;
+      background-color: var(--lt-blue);
+      box-shadow: -13px 0px 13px -3px var(--lt-blue);
+    }
 }
 
 .line_2 {
     width : 30px;
+    animation-name: fade_in_2;
+    animation-duration: 0.3s;
+    animation-delay: 0.1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade_in_2 {
+    0% {
+      opacity: 0;
+      width: 0;
+    }
+    100% {
+      opacity: 1;
+      width: 30px;
+      background-color: var(--lt-blue);
+      box-shadow: -13px 0px 13px -3px var(--lt-blue);
+    }
 }
 
 .line_3 {
     width : 50px;
+    animation-name: fade_in_3;
+    animation-duration: 0.3s;
+    animation-delay: 0.2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade_in_3 {
+    0% {
+      opacity: 0;
+      width: 0;
+    }
+    100% {
+      opacity: 1;
+      width: 50px;
+      background-color: var(--lt-blue);
+      box-shadow: -13px 0px 13px -3px var(--lt-blue);
+    }
 }
 
 .line_4 {
     width : 20px;
+    animation-name: fade_in_4;
+    animation-duration: 0.3s;
+    animation-delay: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade_in_4 {
+    0% {
+      opacity: 0;
+      width: 0;
+    }
+    100% {
+      opacity: 1;
+      width: 20px;
+      background-color: var(--lt-blue);
+      box-shadow: -13px 0px 13px -3px var(--lt-blue);
+    }
 }
 
 .line_5 {
     width : 30px;
+    animation-name: fade_in_5;
+    animation-duration: 0.3s;
+    animation-delay: 0.4s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade_in_5 {
+    0% {
+      opacity: 0;
+      width: 0;
+    }
+    100% {
+      opacity: 1;
+      width: 30px;
+      background-color: var(--lt-blue);
+      box-shadow: -13px 0px 13px -3px var(--lt-blue);
+    }
 }
 
 .line_6 {
     width : 40px;
+    animation-name: fade_in_6;
+    animation-duration: 0.3s;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade_in_6 {
+    0% {
+      opacity: 0;
+      width: 0;
+    }
+    100% {
+      opacity: 1;
+      width: 40px;
+      background-color: var(--lt-blue);
+      box-shadow: -13px 0px 13px -3px var(--lt-blue);
+    }
 }
 
 .line_7 {
     width : 50px;
+    animation-name: fade_in_7;
+    animation-duration: 0.3s;
+    animation-delay: 0.6s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade_in_7 {
+    0% {
+      opacity: 0;
+      width: 0;
+    }
+    100% {
+      opacity: 1;
+      width: 50px;
+      background-color: var(--lt-blue);
+      box-shadow: -13px 0px 13px -3px var(--lt-blue);
+    }
 }
 
 .line_8 {
     width : 60px;
+    animation-name: fade_in_8;
+    animation-duration: 0.3s;
+    animation-delay: 0.7s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade_in_8 {
+    0% {
+      opacity: 0;
+      width: 0;
+    }
+    100% {
+      opacity: 1;
+      width: 60px;
+      background-color: var(--lt-blue);
+      box-shadow: -13px 0px 13px -3px var(--lt-blue);
+    }
 }
 
 .line_9 {
     width : 30px;
+    animation-name: fade_in_9;
+    animation-duration: 0.3s;
+    animation-delay: 0.8s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade_in_9 {
+    0% {
+      opacity: 0;
+      width: 0;
+    }
+    100% {
+      opacity: 1;
+      width: 30px;
+      background-color: var(--lt-blue);
+      box-shadow: -13px 0px 13px -3px var(--lt-blue);
+    }
 }
 
 .line_10 {
     width : 50px;
+    animation-name: fade_in_10;
+    animation-duration: 0.3s;
+    animation-delay: 0.9s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade_in_10 {
+    0% {
+      opacity: 0;
+      width: 0;
+    }
+    100% {
+      opacity: 1;
+      width: 50px;
+      background-color: var(--lt-blue);
+      box-shadow: -13px 0px 13px -3px var(--lt-blue);
+    }
 }
 
 .line_11 {
     width : 30px;
+    animation-name: fade_in_11;
+    animation-duration: 0.3s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
 }
 
+@keyframes fade_in_11 {
+    0% {
+      opacity: 0;
+      width: 0;
+    }
+    100% {
+      opacity: 1;
+      width: 30px;
+      background-color: var(--lt-blue);
+      box-shadow: -13px 0px 13px -3px var(--lt-blue);
+    }
+}
 .line_12 {
     width : 50px;
+    animation-name: fade_in_12;
+    animation-duration: 0.3s;
+    animation-delay: 1.1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade_in_12 {
+    0% {
+      opacity: 0;
+      width: 0;
+    }
+    100% {
+      opacity: 1;
+      width: 50px;
+      background-color: var(--lt-blue);
+      box-shadow: -13px 0px 13px -3px var(--lt-blue);
+    }
 }
 
 .line_13 {
     width : 30px;
+    animation-name: fade_in_13;
+    animation-duration: 0.3s;
+    animation-delay: 1.2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade_in_13 {
+    0% {
+      opacity: 0;
+      width: 0;
+    }
+    100% {
+      opacity: 1;
+      width: 30px;
+      background-color: var(--lt-blue);
+      box-shadow: -13px 0px 13px -3px var(--lt-blue);
+    }
 }
 
 .status_comments {
     margin: 25px 0 0;
+}
+
+@keyframes fade_in {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
 }
 
 .general_comment {

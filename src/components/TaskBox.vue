@@ -85,7 +85,17 @@ export default {
 }
 
 .task_box_wrapper_done {
+    animation: change_background 0.5s;
     background-color: var(--lt-grey-light);
+}
+
+@keyframes change_background {
+    from {
+        background-color: white;
+    }
+    to {
+        background-color: var(--lt-grey-light);
+    }
 }
 
 .check_box {
@@ -118,8 +128,24 @@ export default {
     font-size: 17px;
 }
 
-.task_name_done {
-    text-decoration: line-through;
+@keyframes strike {
+    0%   { width : 0; }
+    100% { width: 100%; }
+}
+
+.task_name_done  {
+    position: relative;
+    width: fit-content;
+}
+.task_name_done::after {
+    content: ' ';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: black;
+    animation: strike 0.5s ease;
 }
 
 .edit_icon {
