@@ -38,7 +38,7 @@ export default {
     },
     data() {
         return {
-            url: "http://localhost:8080",
+            url: "https://code-school-todo-web-app.herokuapp.com",
 
             formatted_deadline: "",
 

@@ -78,7 +78,7 @@
 export default {
     data() {
         return {
-            url: "http://localhost:8080",
+            url: "https://code-school-todo-web-app.herokuapp.com",
             new_todo_name: "",
             new_todo_description: "",
             // Default value of todo dealine is today
