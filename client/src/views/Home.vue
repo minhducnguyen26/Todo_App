@@ -1,79 +1,81 @@
 <template>
-  <div class="home_wrapper">
-    
-    <div class="menu_and_search_and_notification">
-      <router-link class="link_to_menu" to="/Menu">
-        <div class="hambuger_menu">
-          <i class="las la-bars"></i>
+  <div class="whole_page_wrapper">
+    <div class="home_wrapper">
+      
+      <div class="menu_and_search_and_notification">
+        <router-link class="link_to_menu" to="/Menu">
+          <div class="hambuger_menu">
+            <i class="las la-bars"></i>
+          </div>
+        </router-link>
+
+        <div class="search_and_notification">
+          <div class="search_icon">
+            <i class="las la-search"></i>
+          </div>
+
+          <div class="notification_icon" @click="toggle_notification">
+            <i class="notification_on las la-bell" v-if="notification"></i>
+            <i class="notification_off las la-bell-slash" v-if="!notification"></i>
+          </div>
+        </div>
+      
+      </div>
+
+      <div class="greeting">What's up, Minh!</div>
+
+      <div class="sections">
+        <div class="section_titles">CATEGORIES</div>
+
+        <div class="categoriy_boxes">
+          <div class="category_box">
+            <div class="task_amount">40 tasks</div>
+            <div class="category_name">School</div>
+            <div class="progress_lines">
+              <div class="progress_amount_1"></div>
+              <div class="cursor_1"></div>
+            </div>
+          </div>
+
+          <div class="category_box">
+            <div class="task_amount">20 tasks</div>
+            <div class="category_name">Personal</div>
+            <div class="progress_lines">
+              <div class="progress_amount_2"></div>
+              <div class="cursor_2"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sections today_task">
+        <div class="section_titles">TODAY'S TASKS</div>
+
+        <div class="task_boxes">
+          <transition-group name="list_transition">
+            <TaskBox v-for="todo in todos" :key="todo._id" 
+              :todo=todo :edit_done_show_todo=edit_done_show_todo
+              @deleted_one_task="get_all_todos_from_the_server"
+              @need_to_open_edit_todo_modal="toggle_show_edit_todo_modal(todo)"
+              @try_to_open_action_buttons_box="show_action_buttons_box">
+                {{ todo.name }}
+            </TaskBox>
+          </transition-group>
+        </div>
+      </div>
+      
+      <router-link to="/CreateTodo"> 
+        <div class="add_new_todo_button">
+          <i class="las la-plus"></i>
         </div>
       </router-link>
-
-      <div class="search_and_notification">
-        <div class="search_icon">
-          <i class="las la-search"></i>
-        </div>
-
-        <div class="notification_icon" @click="toggle_notification">
-          <i class="notification_on las la-bell" v-if="notification"></i>
-          <i class="notification_off las la-bell-slash" v-if="!notification"></i>
-        </div>
-      </div>
-    
     </div>
 
-    <div class="greeting">What's up, Minh!</div>
-
-    <div class="sections">
-      <div class="section_titles">CATEGORIES</div>
-
-      <div class="categoriy_boxes">
-        <div class="category_box">
-          <div class="task_amount">40 tasks</div>
-          <div class="category_name">School</div>
-          <div class="progress_lines">
-            <div class="progress_amount_1"></div>
-            <div class="cursor_1"></div>
-          </div>
-        </div>
-
-        <div class="category_box">
-          <div class="task_amount">20 tasks</div>
-          <div class="category_name">Personal</div>
-          <div class="progress_lines">
-            <div class="progress_amount_2"></div>
-            <div class="cursor_2"></div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="sections today_task">
-      <div class="section_titles">TODAY'S TASKS</div>
-
-      <div class="task_boxes">
-        <transition-group name="list_transition">
-          <TaskBox v-for="todo in todos" :key="todo._id" 
-            :todo=todo :edit_done_show_todo=edit_done_show_todo
-            @deleted_one_task="get_all_todos_from_the_server"
-            @need_to_open_edit_todo_modal="toggle_show_edit_todo_modal(todo)"
-            @try_to_open_action_buttons_box="show_action_buttons_box">
-              {{ todo.name }}
-          </TaskBox>
-        </transition-group>
-      </div>
-    </div>
-    
-    <router-link to="/CreateTodo"> 
-      <div class="add_new_todo_button">
-        <i class="las la-plus"></i>
-      </div>
-    </router-link>
+    <EditTodo v-if="show_edit_todo_modal" :todo="target_todo_to_edit"
+      @close_edit_todo_modal="edit_todo_done"
+      @updated_todo="saved_new_todo_edit"></EditTodo>
   </div>
-
-  <EditTodo v-if="show_edit_todo_modal" :todo="target_todo_to_edit"
-    @close_edit_todo_modal="edit_todo_done"
-    @updated_todo="saved_new_todo_edit"></EditTodo>
 </template>
 
 <script>
@@ -87,7 +89,7 @@ export default {
   },
   data() {
     return {
-      url: "http://localhost:8080",
+      url: "https://code-school-todo-web-app.herokuapp.com",
 
       todos: [],
 
